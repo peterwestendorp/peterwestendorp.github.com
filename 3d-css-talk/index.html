@@ -1,0 +1,1136 @@
+<!doctype html>
+<html lang="en" class="csstransforms3d">
+
+	<head>
+		<meta charset="utf-8">
+		<title>3D CSS - finding the right perspective</title>
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="css/theme/beige.css" id="theme">
+    <link rel="stylesheet" href="css/presentation.css">
+    <link rel="stylesheet" href="lib/demos/foldable-3d-avatar_demo/stylesheets/application.css">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+	</head>
+
+	<body>
+
+		<div class="reveal">
+			<!-- Used to fade in a background when a specific slide state is reached -->
+			<div class="state-background"></div>
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+        <section>
+          <h1 style="margin-top:0.5em;">Hi</h1>
+          <img src="lib/images/card.png" alt="" style="margin-left: -262px; box-shadow:0px 0px 20px 5px rgba(0, 0, 0, 0.15);">
+        </section>
+        <section>
+					<h1 style="margin-top:0; color:#403F33;">3D CSS</h1>
+					<h3>Finding the right perspective</h3>
+          <img src="lib/images/frontpage.png" alt="" style="margin-left:-199px; bottom:10px;">
+				</section>
+
+        <section>
+          <h1>What</h1>
+          <h2>it is</h2>
+        </section>
+
+        <section>
+          <section>
+            <h2>CSS Transform functions</h2>
+            <ul style="float:left; margin:50px 0 0 150px;">
+              <li><p>rotate()</p></li>
+              <li><p>scale()</p></li>
+              <li><p>skew()</p></li>
+              <li><p>translate()</p></li>
+            </ul>
+            <img src="lib/images/compound_transform.svg" alt="" style="left: auto; right: 50px; top: 100px; width: 400px;">
+          </section>
+          <section>
+            <h2>CSS Rotation</h2>
+            <pre><code>div {
+  transition: transform 1s ease-in-out;
+}
+div:hover {
+  transform: rotate(45deg);
+}</code></pre>
+            <div id="plane1" class="single-plane" style="background-color:#6E755F; width:200px; height:200px; margin:90px auto 0 auto;"></div>
+          </section>
+
+          <section>
+            <h2>But it's all flat</h2>
+            <div class="fake-cube">
+              <div class="topface">
+                <div></div>
+              </div>
+              <div class="leftface">
+                <div></div>
+              </div>
+              <div class="rightface">
+                <div></div>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>3D Transforms</h2>
+            <img src="lib/images/axis.png" alt="" style="margin-left:-239px; bottom:10px;">
+          </section>
+
+          <section>
+            <h2>New transform functions</h2>
+            <div style="overflow:hidden; width:520px; margin:50px auto;">
+              <ul style="float:left; margin:0 50px 0 0; padding-left:1em;">
+                <li><p>rotateX()</p></li>
+                <li><p>rotateY()</p></li>
+                <li><p>rotateZ()</p></li>
+                <li><p>rotate3d()</p><p>&nbsp;</p></li>
+                <li><p>scaleX()</p></li>
+                <li><p>scaleY()</p></li>
+                <li><p>scaleZ()</p></li>
+                <li><p>scale3d()</p></li>
+              </ul>
+              <ul style="float:left;">
+                <li><p>translateX()</p></li>
+                <li><p>translateY()</p></li>
+                <li><p>translateZ()</p></li>
+                <li><p>translate3d()</p><p>&nbsp;</p></li>
+                <li><p>perspective()</p></li>
+                <li><p>matrix3d()</p></li>
+              </ul>
+            </div>
+          </section>
+
+          <section>
+            <h2 style="margin-top:240px; position:relative;">GPU acceleration</h2>
+          </section>
+
+          <section>
+            <h2>3D transforms support</h2>
+            <img src="lib/images/support.png" alt="" style="margin-left:-420px; bottom:175px;">
+          </section>
+        </section>
+
+        <section>
+          <h1>How</h1>
+          <h2>it works</h2>
+        </section>
+
+        <section>
+          <section>
+            <h2>Card-flip</h2>
+            <pre><code contenteditable>div {
+  transform: perspective(700px);
+  transition: transform 1s ease-in-out;
+}
+
+div:hover {
+  transform: perspective(700px) rotateY(180deg);
+}</code></pre>
+            <div class="single-plane" id="plane2" style="background-color:#6E755F; width:200px; height:200px; margin:60px auto 0 auto;">
+              <img src="lib/images/html5-3d-logo.png" style="width:200px; margin:0; position:static; left:auto; top:auto;" alt="">
+            </div>
+          </section>
+        </section>
+
+        <section>
+          <h2>Transform-origin</h2>
+          <pre><code contenteditable>div {
+  transform: perspective(700px);
+  transform-origin: 100% 0;
+  transition: transform 1s ease-in-out;
+}
+
+div:hover {
+  transform: perspective(700px) rotateY(180deg);
+}</code></pre>
+          <div class="single-plane" id="plane2" style="background-color:#6E755F; width:200px; height:200px; margin:40px auto 0 auto; -webkit-transform-origin: 100% 0;">
+            <img src="lib/images/html5-3d-logo.png" style="width:200px; margin:0; position:static; left:auto; top:auto;" alt="">
+          </div>
+        </section>
+
+        <section>
+          <section>
+            <h2>Creating a cube</h2>
+            <pre><code>&lt;div class="cube"&gt;
+  &lt;div class="face" id="top"&gt;&lt;/div&gt;
+  &lt;div class="face" id="front"&gt;&lt;/div&gt;
+  &lt;div class="face" id="right"&gt;&lt;/div&gt;
+  &lt;div class="face" id="left"&gt;&lt;/div&gt;
+  &lt;div class="face" id="back"&gt;&lt;/div&gt;
+  &lt;div class="face" id="bottom"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            <pre><code>.cube {
+  transform-style: preserve-3d;
+}
+.cube div {
+  position: absolute;
+}</code></pre>
+          </section>
+
+          <section>
+            <h2>Rotate and translate</h2>
+            <pre style="float:left; width:76%; margin-left:-40px;"><code style="margin-top:0; font-size:22px;"><span class="fragment" id="front-face">.cube div#front {
+  transform: translateZ(50px);
+}</span>
+<span class="fragment" id="back-face">.cube div#back {
+  transform: translateZ(-50px);
+}</span>
+<span class="fragment" id="right-face">.cube div#right {
+  transform: rotateY(90deg) translateZ(50px);
+}</span>
+<span class="fragment" id="left-face">.cube div#left {
+  transform: rotateY(-90deg) translateZ(50px);
+}</span>
+<span class="fragment" id="top-face">.cube div#top {
+  transform: rotateX(90deg) translateZ(50px);
+}</span>
+<span class="fragment" id="bottom-face">.cube div#bottom {
+  transform: rotateX(-90deg) translateZ(50px);
+}</span></code></pre>
+             <div class="cube step-cube" style="float: none; margin:200px auto 0 auto; -webkit-transform-style: flat; -webkit-transform: scale3d(1.5, 1.5, 1.5) rotateX(-30deg) rotateY(-40deg); -webkit-transform-style: preserve-3d; position:absolute; right:20px; top:80px;">
+              <div class="face" id="top">
+                <ul>
+                  <li class="x"></li>
+                  <li class="y"></li>
+                  <li class="z"></li>
+                </ul>
+              </div>
+              <div class="face" id="front">
+                <ul>
+                  <li class="x"></li>
+                  <li class="y"></li>
+                  <li class="z"></li>
+                </ul>
+              </div>
+              <div class="face" id="right">
+                <ul>
+                  <li class="x"></li>
+                  <li class="y"></li>
+                  <li class="z"></li>
+                </ul>
+              </div>
+              <div class="face" id="left">
+                <ul>
+                  <li class="x"></li>
+                  <li class="y"></li>
+                  <li class="z"></li>
+                </ul>
+              </div>
+              <div class="face" id="back">
+                <ul>
+                  <li class="x"></li>
+                  <li class="y"></li>
+                  <li class="z"></li>
+                </ul>
+              </div>
+              <div class="face" id="bottom">
+                <ul>
+                  <li class="x"></li>
+                  <li class="y"></li>
+                  <li class="z"></li>
+                </ul>
+              </div>
+            </div>
+
+            <aside class="notes">
+              <ol>
+                <li>set 3D rendering context by setting: transform-style: preserve-3d (now intersection can take place)</li>
+                <li>setting it to flat, smacks all 3D transforms of it's children flat</li>
+                <li>That makes the transform just a painting effect without affecting the painting order</li>
+                <li>Note that the order of the transforms matters, because of the rotateY() on the back-face it uses the same translateZ value as the front-face, though it transforms it in the opposite direction</li>
+              </ol>
+            </aside>
+          </section>
+
+          <section>
+            <h2>Order does matter</h2>
+            <pre><code>div {
+  transform: rotateY(90deg) translateZ(200px);
+}</code></pre>
+              <p style="margin-top:26px;">is not the same as</p>
+            <pre><code>div {
+  transform: translateZ(200px) rotateY(90deg) ;
+}</code></pre>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Perspective</h2>
+            <pre><code contenteditable>.scene .cube {
+  transform: perspective(1000px);
+}</code></pre>
+            <div class="blocks own-perspective" style="bottom:50px;">
+              <div class="cube" id="cube-1">
+                <div class="face" id="top"></div>
+                <div class="face" id="front"></div>
+                <div class="face" id="right"></div>
+                <div class="face" id="left"></div>
+                <div class="face" id="back"></div>
+                <div class="face" id="bottom"></div>
+              </div>
+
+              <div class="cube" id="cube-2">
+                <div class="face" id="top"></div>
+                <div class="face" id="front"></div>
+                <div class="face" id="right"></div>
+                <div class="face" id="left"></div>
+                <div class="face" id="back"></div>
+                <div class="face" id="bottom"></div>
+              </div>
+
+              <div class="cube" id="cube-3">
+                <div class="face" id="top"></div>
+                <div class="face" id="front"></div>
+                <div class="face" id="right"></div>
+                <div class="face" id="left"></div>
+                <div class="face" id="back"></div>
+                <div class="face" id="bottom"></div>
+              </div>
+
+              <div class="cube" id="cube-4">
+                <div class="face" id="top"></div>
+                <div class="face" id="front"></div>
+                <div class="face" id="right"></div>
+                <div class="face" id="left"></div>
+                <div class="face" id="back"></div>
+                <div class="face" id="bottom"></div>
+              </div>
+
+              <div class="cube" id="cube-5">
+                <div class="face" id="top"></div>
+                <div class="face" id="front"></div>
+                <div class="face" id="right"></div>
+                <div class="face" id="left"></div>
+                <div class="face" id="back"></div>
+                <div class="face" id="bottom"></div>
+              </div>
+
+              <div class="cube" id="cube-6">
+                <div class="face" id="top"></div>
+                <div class="face" id="front"></div>
+                <div class="face" id="right"></div>
+                <div class="face" id="left"></div>
+                <div class="face" id="back"></div>
+                <div class="face" id="bottom"></div>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2>Shared perspective</h2>
+            <pre><code contenteditable>.scene {
+  perspective: 1000px;
+}</code></pre>
+            <div class="blocks shared-perspective" style="bottom:50px;">
+              <div class="cube" id="cube-1">
+                <div class="face" id="top"></div>
+                <div class="face" id="front"></div>
+                <div class="face" id="right"></div>
+                <div class="face" id="left"></div>
+                <div class="face" id="back"></div>
+                <div class="face" id="bottom"></div>
+              </div>
+
+              <div class="cube" id="cube-2">
+                <div class="face" id="top"></div>
+                <div class="face" id="front"></div>
+                <div class="face" id="right"></div>
+                <div class="face" id="left"></div>
+                <div class="face" id="back"></div>
+                <div class="face" id="bottom"></div>
+              </div>
+
+              <div class="cube" id="cube-3">
+                <div class="face" id="top"></div>
+                <div class="face" id="front"></div>
+                <div class="face" id="right"></div>
+                <div class="face" id="left"></div>
+                <div class="face" id="back"></div>
+                <div class="face" id="bottom"></div>
+              </div>
+
+              <div class="cube" id="cube-4">
+                <div class="face" id="top"></div>
+                <div class="face" id="front"></div>
+                <div class="face" id="right"></div>
+                <div class="face" id="left"></div>
+                <div class="face" id="back"></div>
+                <div class="face" id="bottom"></div>
+              </div>
+
+              <div class="cube" id="cube-5">
+                <div class="face" id="top"></div>
+                <div class="face" id="front"></div>
+                <div class="face" id="right"></div>
+                <div class="face" id="left"></div>
+                <div class="face" id="back"></div>
+                <div class="face" id="bottom"></div>
+              </div>
+
+              <div class="cube" id="cube-6">
+                <div class="face" id="top"></div>
+                <div class="face" id="front"></div>
+                <div class="face" id="right"></div>
+                <div class="face" id="left"></div>
+                <div class="face" id="back"></div>
+                <div class="face" id="bottom"></div>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2>Perspective values</h2>
+            <pre><code contenteditable>.scene {
+  perspective: 700px;
+}
+.scene:hover {
+  perspective: 250px;
+}</code></pre>
+            <div class="blocks change-perspective">
+              <div class="cube" id="cube-1">
+                <div class="face" id="top"></div>
+                <div class="face" id="front"></div>
+                <div class="face" id="right"></div>
+                <div class="face" id="left"></div>
+                <div class="face" id="back"></div>
+                <div class="face" id="bottom"></div>
+              </div>
+
+              <div class="cube" id="cube-2">
+                <div class="face" id="top"></div>
+                <div class="face" id="front"></div>
+                <div class="face" id="right"></div>
+                <div class="face" id="left"></div>
+                <div class="face" id="back"></div>
+                <div class="face" id="bottom"></div>
+              </div>
+
+              <div class="cube" id="cube-3">
+                <div class="face" id="top"></div>
+                <div class="face" id="front"></div>
+                <div class="face" id="right"></div>
+                <div class="face" id="left"></div>
+                <div class="face" id="back"></div>
+                <div class="face" id="bottom"></div>
+              </div>
+
+              <div class="cube" id="cube-4">
+                <div class="face" id="top"></div>
+                <div class="face" id="front"></div>
+                <div class="face" id="right"></div>
+                <div class="face" id="left"></div>
+                <div class="face" id="back"></div>
+                <div class="face" id="bottom"></div>
+              </div>
+
+              <div class="cube" id="cube-5">
+                <div class="face" id="top"></div>
+                <div class="face" id="front"></div>
+                <div class="face" id="right"></div>
+                <div class="face" id="left"></div>
+                <div class="face" id="back"></div>
+                <div class="face" id="bottom"></div>
+              </div>
+
+              <div class="cube" id="cube-6">
+                <div class="face" id="top"></div>
+                <div class="face" id="front"></div>
+                <div class="face" id="right"></div>
+                <div class="face" id="left"></div>
+                <div class="face" id="back"></div>
+                <div class="face" id="bottom"></div>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2>Perspective origin</h2>
+            <pre><code contenteditable>.scene {
+  perspective-origin: 50% 25%;
+}
+.scene:hover {
+  perspective-origin: 0 0;
+}</code></pre>
+            <div class="blocks perspective-origin">
+              <div class="cube" id="cube-1">
+                <div class="face" id="top"></div>
+                <div class="face" id="front"></div>
+                <div class="face" id="right"></div>
+                <div class="face" id="left"></div>
+                <div class="face" id="back"></div>
+                <div class="face" id="bottom"></div>
+              </div>
+
+              <div class="cube" id="cube-2">
+                <div class="face" id="top"></div>
+                <div class="face" id="front"></div>
+                <div class="face" id="right"></div>
+                <div class="face" id="left"></div>
+                <div class="face" id="back"></div>
+                <div class="face" id="bottom"></div>
+              </div>
+
+              <div class="cube" id="cube-3">
+                <div class="face" id="top"></div>
+                <div class="face" id="front"></div>
+                <div class="face" id="right"></div>
+                <div class="face" id="left"></div>
+                <div class="face" id="back"></div>
+                <div class="face" id="bottom"></div>
+              </div>
+
+              <div class="cube" id="cube-4">
+                <div class="face" id="top"></div>
+                <div class="face" id="front"></div>
+                <div class="face" id="right"></div>
+                <div class="face" id="left"></div>
+                <div class="face" id="back"></div>
+                <div class="face" id="bottom"></div>
+              </div>
+
+              <div class="cube" id="cube-5">
+                <div class="face" id="top"></div>
+                <div class="face" id="front"></div>
+                <div class="face" id="right"></div>
+                <div class="face" id="left"></div>
+                <div class="face" id="back"></div>
+                <div class="face" id="bottom"></div>
+              </div>
+
+              <div class="cube" id="cube-6">
+                <div class="face" id="top"></div>
+                <div class="face" id="front"></div>
+                <div class="face" id="right"></div>
+                <div class="face" id="left"></div>
+                <div class="face" id="back"></div>
+                <div class="face" id="bottom"></div>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2>Perspective vs TranlateZ</h2>
+            <pre><code>.scene {
+  perspective: 700px;
+}
+.scene div {
+  transform: translateZ(0);
+}
+.scene div.clicked {
+  transform: translateZ(1000px);
+}</code></pre>
+            <div class="scene" style="-webkit-perspective: 700px; -webkit-perspective-origin: 50% 50%;">
+              <div class="single-plane" id="plane3" style="background-color:#6E755F; width:200px; height:200px; margin:60px auto 0 auto;">
+                <img src="lib/images/html5-3d-logo.png" style="width:200px; margin:0; position:static; left:auto; top:auto;" alt="">
+              </div>
+            </div>
+            <script type="text/javascript">
+              document.getElementById('plane3').onclick = function(){
+                this.className += " hover";
+              };
+            </script>
+            <aside class="notes">
+              <ol>
+                <li>if there's no rotation applied and the translateZ is greater than the perspective...</li>
+                <li>...the object will be invisible because it's behind the viewer</li>
+              </ol>
+            </aside>
+          </section>
+
+          <section>
+            <h2>Behind you!</h2>
+            <pre><code>.scene {
+  perspective: 700px;
+}
+.scene div {
+  transform: translateZ(0);
+}
+.scene div.clicked {
+  transform: translateZ(1000px);
+}</code></pre>
+            <div class="scene" style="-webkit-perspective: 700px; -webkit-perspective-origin: 50% 50%;">
+              <div class="single-plane" id="plane4" style="background-color:#6E755F; width:200px; height:200px; margin:60px auto 0 auto;">
+                <img src="lib/images/html5-3d-logo.png" style="width:200px; margin:0; position:static; left:auto; top:auto;" alt="">
+              </div>
+            </div>
+            <script type="text/javascript">
+              document.getElementById('plane4').onclick = function(){
+                this.className += " hover";
+              };
+            </script>
+          </section>
+        </section>
+
+        <section>
+          <h2>Backface-visibility</h2>
+          <pre><code contenteditable>.scene .cube .face {
+  backface-visibility: visible;
+}
+.scene:hover .cube .face {
+  backface-visibility: hidden;
+}</code></pre>
+          <div class="blocks backface" style="-webkit-perspective:1000px;">
+            <div class="cube" id="backface-cube">
+              <div class="face" id="top"></div>
+              <div class="face" id="front"></div>
+              <div class="face" id="right"></div>
+              <div class="face" id="left"></div>
+              <div class="face" id="back"></div>
+              <div class="face" id="bottom"></div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <section>
+            <h2>getComputedStyle()</h2>
+            <pre><code>div#foobar {
+  width: 200px;
+  height: 80px;
+  transform: rotate(-3deg) scale(0.9);
+  transform-origin: 0 0;
+}</code></pre>
+            <pre><code>var elm = document.getElementById('foobar');
+
+elm.getComputedStyle('transform');
+
+<span class="fragment">// matrix(0.9, -0.05, -0.375, 1.375, 220, 20)</span></code></pre>
+          </section>
+
+          <section>
+            <h2>New coordinates</h2>
+            <img src="lib/images/calc.png" alt="" style="margin-left:-400px; bottom:380px; width:900px;">
+            <img src="lib/images/matrice-visual.png" alt="" style="margin-left:-320px; bottom:20px;">
+          </section>
+
+          <section>
+            <h2>Matrix3d()</h2>
+            <pre><code>div#foobar {
+  transform: matrix3d(0.97, -0.11, 0.18, 0, 0.06, 0.97, 0.22, 0, -0.20, -0.20, 0.95, 0, 0, 0, 0, 1);
+}</code></pre>
+          </section>
+        </section>
+
+        <section>
+          <h1>Demo</h1>
+          <h2>time</h2>
+        </section>
+
+        <section>
+          <h2>Beercamp popup book</h2>
+          <a href="http://2012.beercamp.com/" target="_blank"><img src="lib/images/beercamp.png" alt="" style="margin-left:-350px; bottom:60px;"></a>
+          <p style="position: absolute; bottom: 0; text-align: center; width: 100%;"><a href="http://2012.beercamp.com" target="_blank">2012.beercamp.com</a></p>
+        </section>
+
+        <section>
+          <h2>CSS3D Clouds</h2>
+          <a href="http://www.clicktorelease.com/code/css3dclouds/" target="_blank"><img src="lib/images/clouds.png" alt="" style="margin-left:-350px; bottom:60px;"></a>
+          <p style="position: absolute; bottom: 0; text-align: center; width: 100%;"><a href="http://clicktorelease.com/code/css3dclouds" target="_blank">clicktorelease.com/code/css3dclouds</a></p>
+        </section>
+
+        <section>
+          <h2>3D Sphere</h2>
+          <a href="http://codepen.io/peterwestendorp/pen/wGECk" target="_blank"><img src="lib/images/ball.png" alt="" style="margin-left:-325px; bottom:20px;"></a>
+          <p style="position: absolute; bottom: -40px; text-align: center; width: 100%;"><a href="http://codepen.io/peterwestendorp/pen/wGECk" target="_blank">codepen.io/peterwestendorp/pen/wGECk</a></p>
+        </section>
+
+        <section>
+          <h2>3D Room</h2>
+          <a href="http://www.keithclark.co.uk/labs/3dcss/demo" target="_blank"><img src="lib/images/fps.png" alt="" style="margin-left:-350px; bottom:80px;"></a>
+          <p style="position: absolute; bottom: 0; text-align: center; width: 100%;"><a href="http://www.keithclark.co.uk/labs/3dcss/demo" target="_blank">keithclark.co.uk/labs/3dcss/demo</a></p>
+        </section>
+
+        <section id="foldable">
+          <h1 style="margin-top:0;">In the wild</h1>
+          <div class="hipster-holder" id="foldable-traqball">
+            <div class="hipster-preview">
+              <div class="hipster front">
+                <div id="hipster-head" class="cube">
+                  <div class="surface top" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted.png);">
+                    <ul>
+                      <li class="hair" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted.png);"></li>
+                    </ul>
+                  </div>
+                  <div class="surface front" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted.png);">
+                    <ul>
+                      <li class="face" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted.png);"></li>
+                    </ul>
+                  </div>
+                  <div class="surface right" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted.png);">
+                    <ul>
+                      <li class="hair" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted.png);"></li>
+                    </ul>
+                  </div>
+                  <div class="surface back" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted.png);">
+                    <ul>
+                      <li class="hair" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted.png);"></li>
+                    </ul>
+                  </div>
+                  <div class="surface left" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted.png);">
+                    <ul>
+                      <li class="hair" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted.png);"></li>
+                    </ul>
+                  </div>
+                  <div class="surface bottom" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted.png);"></div>
+                </div>
+
+                <div id="hipster-body" class="cube">
+                  <div class="surface top" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted.png);"></div>
+                  <div class="surface front" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted.png);">
+                    <ul>
+                      <li class="shirt" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted_upsidedown.png);"></li>
+                    </ul>
+                  </div>
+                  <div class="surface right" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted.png);">
+                    <ul>
+                      <li class="shirt" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted_upsidedown.png);"></li>
+                    </ul>
+                  </div>
+                  <div class="surface back" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted.png);">
+                    <ul>
+                      <li class="shirt" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted_upsidedown.png);"></li>
+                    </ul>
+                  </div>
+                  <div class="surface left" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted.png);">
+                    <ul>
+                      <li class="shirt" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted_upsidedown.png);"></li>
+                    </ul>
+                  </div>
+                  <div class="surface bottom" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted.png);">
+                    <ul>
+                      <li class="shirt" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted_upsidedown.png);"></li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div id="hipster-arm-left" class="cube">
+                  <div class="surface top" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted.png);">
+                    <ul>
+                      <li class="shirt" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted_upsidedown.png);"></li>
+                    </ul>
+                  </div>
+                  <div class="surface front" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted.png);">
+                    <ul>
+                      <li class="shirt" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted_upsidedown.png);"></li>
+                    </ul>
+                  </div>
+                  <div class="surface right" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted.png);">
+                    <ul>
+                      <li class="shirt" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted_upsidedown.png);"></li>
+                    </ul>
+                  </div>
+                  <div class="surface back" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted.png);">
+                    <ul>
+                      <li class="shirt" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted_upsidedown.png);"></li>
+                    </ul>
+                  </div>
+                  <div class="surface left" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted.png);">
+                    <ul>
+                      <li class="shirt" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted_upsidedown.png);"></li>
+                    </ul>
+                  </div>
+                  <div class="surface bottom" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted_upsidedown.png);"></div>
+                </div>
+
+                <div id="hipster-arm-right" class="cube">
+                  <div class="surface top" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted.png);">
+                    <ul>
+                      <li class="shirt" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted_upsidedown.png);"></li>
+                    </ul>
+                  </div>
+                  <div class="surface front" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted.png);">
+                    <ul>
+                      <li class="shirt" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted_upsidedown.png);"></li>
+                    </ul>
+                  </div>
+                  <div class="surface right" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted.png);">
+                    <ul>
+                      <li class="shirt" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted_upsidedown.png);"></li>
+                    </ul>
+                  </div>
+                  <div class="surface back" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted.png);">
+                    <ul>
+                      <li class="shirt" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted_upsidedown.png);"></li>
+                    </ul>
+                  </div>
+                  <div class="surface left" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted.png);">
+                    <ul>
+                      <li class="shirt" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted_upsidedown.png);"></li>
+                    </ul>
+                  </div>
+                  <div class="surface bottom" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted_upsidedown.png);"></div>
+                </div>
+
+                <div id="hipster-feet" class="cube">
+                  <div class="surface front" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted_side.png);">
+                    <ul>
+                      <li class="trousers" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted_side.png);"></li>
+                    </ul>
+                  </div>
+                  <div class="surface right" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted_side.png);">
+                    <ul>
+                      <li class="trousers" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted_side.png);"></li>
+                    </ul>
+                  </div>
+                  <div class="surface back" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted_side.png);">
+                    <ul>
+                      <li class="trousers" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted_side.png);"></li>
+                    </ul>
+                  </div>
+                  <div class="surface left" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted_side.png);">
+                    <ul>
+                      <li class="trousers" style="background-image:url(lib/demos/foldable-3d-avatar_demo/images/hipster-assets/rob_kubasko_adjusted_side.png);"></li>
+                    </ul>
+                  </div>
+                  <div class="surface bottom" style="background:transparent;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Foldable.Me</h2>
+          <img src="lib/images/foldableme.jpg" alt="" style="width:650px; margin-left:-325px; bottom:10px;">
+        </section>
+
+        <section>
+          <section>
+            <h2><span style="color:#E54C10;">Tip 1:</span> Test in beta versions too</h2>
+            <img src="lib/images/beta-versions.jpg" alt="" style="width:700px; margin-left:-350px;">
+          </section>
+
+          <section>
+            <h2>Firefox before update</h2>
+            <img src="lib/images/FF11.png" alt="" style="margin-left:-195px">
+          </section>
+
+          <section>
+            <h2>Firefox after update</h2>
+            <img src="lib/images/FF12.png" alt="" style="margin-left:-195px">
+            <img class="fragment" src="lib/images/FF12-troll.png" alt="" style="margin-left:-195px; position: absolute; left:50%;">
+          </section>
+
+          <section>
+            <h2>Chrome before update</h2>
+            <img src="lib/images/chrome18.png" alt="" style="width:600px; margin-left:-300px; bottom:125px;">
+          </section>
+
+          <section>
+            <h2>Chrome after update</h2>
+            <img src="lib/images/chrome19.png" alt="" style="width:600px; margin-left:-300px; bottom:125px;">
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2><span style="color:#E54C10;">Tip 2:</span> Animating rotation</h2>
+            <div class="animation-holder">
+              <div class="cube">
+                <div class="face" id="face1"></div>
+                <div class="face" id="face2"></div>
+                <div class="face" id="face3"></div>
+                <div class="face" id="face4"></div>
+                <div class="face" id="face5"><img src="lib/images/trollface.png" style="bottom:0; left:0; width:250px; height:250px; margin:0;" alt=""></div>
+                <div class="face" id="face6"></div>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2>Gimbal Lock</h2>
+            <img src="lib/images/gimballock.gif" alt="" width="402" style="margin-left: -200px;">
+          </section>
+
+          <section>
+            <h2>Apollo 11</h2>
+            <img src="lib/images/nasa.jpg" style="margin-left: -320px; bottom:20px;" alt="">
+          </section>
+
+          <section>
+            <h2>Rotate just 2 axis</h2>
+            <div class="animation-holder simple">
+              <div class="cube">
+                <div class="face" id="face1"></div>
+                <div class="face" id="face2"></div>
+                <div class="face" id="face3"></div>
+                <div class="face" id="face4"></div>
+                <div class="face" id="face5"><img src="lib/images/trollface.png" style="bottom:0; left:0; width:250px; height:250px; margin:0;" alt=""></div>
+                <div class="face" id="face6"></div>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2>Different rotation speeds</h2>
+            <div class="animation-holder double">
+              <div class="cube">
+                <div class="face" id="face1"></div>
+                <div class="face" id="face2"></div>
+                <div class="face" id="face3"></div>
+                <div class="face" id="face4"></div>
+                <div class="face" id="face5"><img src="lib/images/trollface.png" style="bottom:0; left:0; width:250px; height:250px; margin:0;" alt=""></div>
+                <div class="face" id="face6"></div>
+              </div>
+            </div>
+          </section>
+
+          <section id="traqball">
+            <h2>Use Traqball.js</h2>
+            <p>github.com/dirkweber/traqball.js</p>
+            <div class="animation-holder" id="traqball-holder">
+              <div class="cube" id="traqball-cube">
+                <div class="face" id="top"></div>
+                <div class="face" id="front"></div>
+                <div class="face" id="right"></div>
+                <div class="face" id="left"></div>
+                <div class="face" id="back"></div>
+                <div class="face" id="bottom"></div>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2>Use quaternion rotation</h2>
+            <img src="lib/images/no-idea.jpg" alt="" style="width:600px; margin-left: -300px; bottom:100px;" class="fragment">
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2><span style="color:#E54C10;">Tip 3:</span> Don't intersect planes</h2>
+            <div style="margin:0 auto; width: 700px;">
+              <div style="float:left; margin-right:50px;"><img src="lib/images/chrome-intersect.png" alt="" style="left:auto; bottom:auto; position: relative;">
+                <p>Chrome</p>
+              </div>
+              <div style="float:left;"><img src="lib/images/safari-intersect.png" alt="" style="left:auto; bottom:auto; position: relative;">
+                <p>Safari</p>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Webkit doesn't draw</h2>
+            <div class="fragment">
+              <img src="lib/images/russel.jpg" style="width: 600px; bottom:30px; left:0; position:relative;" alt="">
+              <p>Alex Russell - How Web Browsers Work</p>
+              <a href="http://vimeo.com/22158462">vimeo.com/22158462</a>
+            </div>
+
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2><span style="color:#E54C10;">Tip 4:</span> Chrome</h2>
+            <img src="lib/images/chrome-logo.png" alt="" style="width: 500px; margin-left:-250px; bottom:20px;">
+          </section>
+
+          <section>
+            <h2>chrome://flags</h2>
+            <img src="lib/images/render-layer-borders.png" alt="" style="width:500px; position: relative; margin:0 auto; left:auto; bottom:auto;">
+            <p>'Composited render layer borders'</p>
+          </section>
+
+          <section>
+            <h2>chrome://gpu</h2>
+            <img src="lib/images/chrome-gpu.png" alt="" style="margin-left:-374px; bottom:50px;">
+          </section>
+
+        </section>
+
+        <section>
+          <h2><span style="color:#E54C10;">Tip 5:</span> Photon.js</h2>
+          <img src="lib/images/photon.png" alt="" style="margin-left:-308px;">
+        </section>
+
+        <section>
+          <h2>Limitations</h2>
+          <ul style="margin-top:1em;">
+            <li class="fragment" style="margin-bottom: .75em;">All faces are still flat</li>
+            <li class="fragment" style="margin-bottom: .75em;">No proper lighting engine</li>
+          </ul>
+        </section>
+
+        <section>
+          <h1>Alternatives</h1>
+        </section>
+
+        <section>
+          <section>
+            <h2>WebGL</h2>
+            <img src="lib/images/webgl.png" alt="" style="margin-left:-290px; bottom:100px;">
+          </section>
+
+          <section>
+            <h2><h2>Create with Blender</h2></h2>
+            <img src="lib/images/blender.png" style="width:650px; margin-left:-325px; bottom:20px;" alt="">
+          </section>
+
+          <section>
+            <h2>Import with Three.js</h2>
+            <a href="lib/demos/webgl-demo/webgl.html" target="_blank"><img src="lib/images/webgl-foldable.png" alt="" style="width:540px; margin-left:-270px;"></a>
+          </section>
+
+          <section>
+            <h2>Proper lighting</h2>
+            <a href="http://mrdoob.github.com/three.js/examples/webgl_particles_shapes.html" target="_blank"><img src="lib/images/threejs.png" alt="" style="width:700px; margin-left:-350px;"></a>
+          </section>
+
+        </section>
+
+        <section>
+          <h2>Flash</h2>
+          <img src="lib/images/adobe-flash-logo.jpg" alt="" style="bottom:125px; margin-left:-128px;">
+        </section>
+
+        <section>
+          <section>
+            <h2>Upcoming standards</h2>
+            <img src="lib/images/overexcited.gif" alt="" style="width:600px; margin-left:-300px; bottom:30px;">
+          </section>
+
+          <section>
+            <h2>Markup based 3D</h2>
+            <ul>
+              <li>W3C Declarative 3D Community Group</li>
+              <li>X3D: XML based 3D graphics format</li>
+            </ul>
+            <pre><code>&lt;dec3d width="400px" height="400px"&gt;
+  &lt;scene&gt;
+    &lt;viewpointposition="0010"/&gt;
+    &lt;shape&gt;
+      &lt;appearance&gt;
+        &lt;materialdiffuseColor="001"/&gt;
+      &lt;/appearance&gt;
+      &lt;box DEF="box" size="111"/&gt;
+    &lt;/shape&gt;
+  &lt;/scene&gt;
+&lt;/dec3d&gt;</code></pre>
+          </section>
+
+          <section>
+            <h2>CSS Custom Filters</h2>
+            <img src="lib/images/custom-filters.jpg" style="position:relative; width:600px; margin:50px auto -30px auto; left:auto;" alt="">
+            <p>Adobe CSS FilterLab: <a href="http://adobe.ly/PqozPh" target="_blank">adobe.ly/PqozPh</a></p>
+          </section>
+        </section>
+
+        <section>
+          <h1>Lessons</h1>
+          <h2>from the past</h2>
+        </section>
+
+        <section>
+          <h2>3D on the web isn't new</h2>
+          <img src="lib/images/second-life.jpg" alt="" style="bottom:120px; margin-left: -331px;">
+          <img src="lib/images/click_here.gif" style="width:200px; margin-left:-100px; bottom:0px;" alt="">
+        </section>
+
+        <section>
+          <h2>Don't get in the way</h2>
+          <blockquote cite="http://www.useit.com/alertbox/981115.html" style="text-align: left; background-color: rgba(255, 255, 255, 0.5); width:85%; line-height: 1.5;">
+            Avoid virtual reality gimmicks ... the goal of Web design is to be better than reality.
+          </blockquote>
+          <p style="color:#545A46; margin-top:1em; font-style:italic;">Jacob Nielsen</p>
+          <a href="http://bit.ly/rveMQ" style="color:#545A46;">http://bit.ly/rveMQ</a>
+        </section>
+
+        <section>
+          <h1>Having said</h1>
+          <h2>that...</h2>
+        </section>
+
+        <section>
+          <h2>Meny</h2>
+          <a href="http://lab.hakim.se/meny/" target="_blank"><img src="lib/images/meny.png" style="position:relative; width:650px; left:auto; margin: 50px auto -30px auto;" alt=""></a>
+          <a href="http://lab.hakim.se/meny/" class="roll">lab.hakim.se/meny/</a>
+        </section>
+
+        <section>
+          <h2>Tell a designer</h2>
+          <img src="lib/images/bad-design.jpg" style="position: absolute; margin-left:-375px; bottom:0;" alt="">
+        </section>
+
+        <section>
+          <h1 style="margin-top:0.5em;">Questions?</h1>
+          <img src="lib/images/card.png" alt="" style="margin-left: -262px; box-shadow:0px 0px 20px 5px rgba(0, 0, 0, 0.15);">
+        </section>
+
+        <section>
+          <h2>Image Credits</h2>
+          <ul style="font-size:20px; line-height: 1.5;">
+            <li>w3.org</li>
+            <li>caniuse.com</li>
+            <li>cheezburger.com</li>
+            <li>google.com</li>
+            <li>wikipedia.com</li>
+            <li>nasa.gov</li>
+            <li>adobe.com</li>
+            <li>gifsoup.com</li>
+            <li>bigfunnysite.com</li>
+            <li>flickr.com/franksvalli</li>
+            <li>secondlife.com</li>
+          </ul>
+          <p style="margin-top:25px; font-size:26px;">Slides powered by Reveal.js</p>
+        </section>
+
+			</div>
+
+			<!-- The navigational controls UI -->
+			<aside class="controls">
+				<a class="left" href="#">&#x25C4;</a>
+				<a class="right" href="#">&#x25BA;</a>
+				<a class="up" href="#">&#x25B2;</a>
+				<a class="down" href="#">&#x25BC;</a>
+			</aside>
+
+			<!-- Presentation progress bar -->
+			<div class="progress"><span></span></div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="js/presentation.js"></script>
+    <script type="text/javascript" src="js/traqball.js"></script>
+    <script type="text/javascript" src="js/photon.min.js"></script>
+    <script type="text/javascript" src="lib/demos/foldable-3d-avatar_demo/javascripts/application.js"></script>
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+
+				theme: Reveal.getQueryHash().theme || 'beige', // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/linear(2d)
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/highlight.js', async: true, callback: function() { window.hljs.initHighlightingOnLoad(); } },
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'lib/js/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'lib/js/data-markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/socket.io/socket.io.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } },
+					{ src: 'plugin/speakernotes/client.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } },
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

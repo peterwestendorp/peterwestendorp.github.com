@@ -1,0 +1,9 @@
+auto: true
+server: true
+permalink: /blog/:title.html
+pygments: true
+
+source:      .
+destination: ./_site
+safe: true
+lsi: false

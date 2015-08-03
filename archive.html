@@ -1,0 +1,10 @@
+---
+layout: archive
+title: Archive
+overview: true
+---
+<ul class="archive-overview">
+  {% for post in site.posts %}
+    <li><span>{{ post.date | date_to_string }}</span> - <a href="./{{ post.url }}" data-modal="true">{{ post.title }}</a></li>
+  {% endfor %}
+</ul>
