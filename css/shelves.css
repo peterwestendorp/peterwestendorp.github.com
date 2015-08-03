@@ -253,13 +253,13 @@ html.csstransforms3d .shelf .card {
   position: relative;
   margin:0;
   box-shadow: none;
-  -webkit-transform-style:  preserve-3d;
+  /*-webkit-transform-style:  preserve-3d;*/
   -webkit-transform:        rotateX(-90deg)
                             rotateY(270deg)
                             translateY(-50px)
                             translateZ(30px);
 
-  -moz-transform-style: preserve-3d;
+  /*-moz-transform-style: preserve-3d;*/
   -moz-transform:       rotateX(-90deg)
                         rotateY(270deg)
                         translateY(-50px)
