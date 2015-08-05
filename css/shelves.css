@@ -121,6 +121,12 @@ html.overflowscrolling .wallpaper {
 }
 html.csstransforms3d .shelf {
   position: absolute;
+
+
+  width: 650px;
+  height:1px;
+
+
   left:50%;
   margin-left:-325px;
   -webkit-transform-style:  preserve-3d;
@@ -185,6 +191,16 @@ html.csstransforms3d .shelf .left {
   background: -moz-linear-gradient(-90deg, #fff7eb 25%, #e5e2dd 100%);
   -moz-transform: translateX(25px) translateY(-350px) rotateY(-90deg) translateZ(0);
 }
+html.csstransforms3d .shelf .right {
+  width: 20px;
+  height: 700px;
+  background: -webkit-linear-gradient(-90deg, #fff7eb 25%, #e5e2dd 100%);
+  -webkit-transform: translateX(117px) translateY(-350px) rotateY(-90deg) translateZ(0);
+
+  background: -moz-linear-gradient(-90deg, #fff7eb 25%, #e5e2dd 100%);
+  -moz-transform: translateX(117px) translateY(-350px) rotateY(-90deg) translateZ(0);
+  box-shadow: -20px -20px 30px 10px rgba(0, 0, 0, 0.5);
+}
 html.csstransforms3d .shelf .top {
   width: 20px;
   height: 100px;
@@ -201,24 +217,6 @@ html.csstransforms3d .shelf .bottom {
 }
 
 /* lighting */
-html.csstransforms3d .shelf:before {
-  content:"";
-  display:block;
-  width: 670px;
-  height:20px;
-  box-shadow: 0 -30px 30px 20px rgba(0, 0, 0, 0.5);
-  -webkit-transform:  rotateX(90deg)
-                      rotateY(90deg)
-                      translateX(-20px)
-                      translateZ(-200px)
-                      skew(-45deg);
-
-  -moz-transform:     rotateX(90deg)
-                      rotateY(90deg)
-                      translateX(-20px)
-                      translateZ(-200px)
-                      skew(-45deg);
-}
 .shelf .back:before {
   content:"";
   position: absolute;
