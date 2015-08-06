@@ -69,7 +69,7 @@ PW.Modal = function(){
       $(window).on('resize', this.setPosition);
       $body.on('click', 'a[data-modal][href]', function(ev){
         ev.preventDefault();
-        _this.loadContent(ev.target.href);
+        _this.loadContent(ev.currentTarget.href);
         _this.show();
       });
       $closeBtn.on('click', function(ev){
