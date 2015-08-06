@@ -131,7 +131,7 @@ html.csstransforms3d .shelf {
   margin-left:-325px;
   -webkit-transform-style:  preserve-3d;
   -webkit-backface-visibility:  hidden;
-  -webkit-transform: rotateY(90deg) rotateX(90deg) translateX(199px);
+  -webkit-transform: rotateY(90deg) rotateX(90deg) translateX(150px);
 
   -moz-transform-style:  preserve-3d;
   -moz-backface-visibility:  hidden;
